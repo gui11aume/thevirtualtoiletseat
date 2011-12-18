@@ -27,6 +27,7 @@ function get_uid() {
   }
 }
 
+
 function ping() {
 
   var request = new XMLHttpRequest();
@@ -40,4 +41,10 @@ function ping() {
 
   request.send("uid=" + uid);
 
+}
+
+
+
+window.onload = function() {
+  var keep_pinging = setInterval("ping()", 3000);
 }
