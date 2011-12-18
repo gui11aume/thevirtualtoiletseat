@@ -17,3 +17,27 @@ function postUpdate(action) {
   request.send(action);
 
 }
+
+function get_uid() {
+  var cookie_items = document.cookie.split(';');
+  for (var i=0 ; i < cookie_items.length ; i++) {
+    if (cookie_items[i].match(/^uid=/)) {
+      return (cookie_items[i].replace(/uid=/, ''));
+    }
+  }
+}
+
+function ping() {
+
+  var request = new XMLHttpRequest();
+  var uid = get_uid();
+
+  request.open("POST", "/ping", true);
+  request.setRequestHeader("Content-type",
+      "application/x-www-form-urlencoded");
+  request.setRequestHeader("Content-length", uid.length);
+  request.setRequestHeader("Connection", "close");
+
+  request.send("uid=" + uid);
+
+}
