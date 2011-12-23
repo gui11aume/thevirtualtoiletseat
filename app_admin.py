@@ -4,10 +4,12 @@
 
 import sys
 import traceback
+import datetime
 
 from google.appengine.api import mail
 from google.appengine.ext import db
 
+NO_PING_TIMEOUT = datetime.timedelta(seconds=7)
 
 class ToiletSeat(db.Model):
    """Store the state of the toilet seat."""
@@ -22,7 +24,7 @@ class User(db.Model):
    """Store a user."""
    uid = db.StringProperty()
    first_ping = db.DateTimeProperty(auto_now_add=True)
-   last_ping = db.DateTimeProperty()
+   last_ping = db.DateTimeProperty(auto_now_add=True)
 
 
 def user_key():
